@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../config/app_theme.dart';
 import 'home/screens/home_screen.dart';
 
 class AppWidget extends StatefulWidget {
@@ -13,9 +14,7 @@ class _AppWidgetState extends State<AppWidget> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.from(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFF007FFF)),
-      ),
+      theme: AppTheme.theme,
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       onGenerateRoute: _onGenerateRoute,
