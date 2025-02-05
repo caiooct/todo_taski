@@ -7,6 +7,7 @@ environment:
   sdk: ^3.6.0
 
 dependencies:
+  auto_injector: 2.0.5
   flutter:
     sdk: flutter
   flutter_svg: 2.0.17
