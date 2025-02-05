@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'home/screens/home_screen.dart';
+
 class AppWidget extends StatefulWidget {
   const AppWidget({super.key});
 
@@ -22,7 +24,7 @@ class _AppWidgetState extends State<AppWidget> {
 
   Route? _onGenerateRoute(RouteSettings settings) {
     final page = switch (settings.name) {
-      '/' => const Scaffold(),
+      '/' => const HomeScreen(),
       _ => ErrorWidget(Exception()),
     };
     return MaterialPageRoute(builder: (_) => page, settings: settings);
