@@ -3,6 +3,8 @@ description: "A new Flutter project."
 publish_to: 'none'
 version: 0.1.0
 
+isar_version: &isar_version 3.1.0+1
+
 environment:
   sdk: ^3.6.0
 
@@ -12,11 +14,16 @@ dependencies:
     sdk: flutter
   flutter_svg: 2.0.17
   google_fonts: 6.2.1
+  isar: *isar_version
+  isar_flutter_libs: *isar_version # contains Isar Core
+  path_provider: any
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  isar_generator: *isar_version
+  build_runner: any
 
 flutter:
   uses-material-design: true
