@@ -9,5 +9,11 @@ abstract final class AppTheme {
   static final ThemeData theme = ThemeData.from(
     colorScheme: ColorScheme.fromSeed(seedColor: AppColors.blue),
     textTheme: _textTheme,
+  ).copyWith(
+    snackBarTheme: SnackBarThemeData(
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: AppColors.blue,
+      actionTextColor: Colors.white,
+    ),
   );
 }
