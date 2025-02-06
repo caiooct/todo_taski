@@ -3,9 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../config/app_colors.dart';
 import '../../../config/assets.dart';
+import '../view_models/home_view_model.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final HomeViewModel viewModel;
+
+  const HomeScreen({required this.viewModel, super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();

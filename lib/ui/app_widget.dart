@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../config/app_theme.dart';
+import '../config/dependencies.dart';
 import 'home/screens/home_screen.dart';
+import 'home/view_models/home_view_model.dart';
 
 class AppWidget extends StatefulWidget {
   const AppWidget({super.key});
@@ -23,7 +25,7 @@ class _AppWidgetState extends State<AppWidget> {
 
   Route? _onGenerateRoute(RouteSettings settings) {
     final page = switch (settings.name) {
-      '/' => const HomeScreen(),
+      '/' => HomeScreen(viewModel: injector<HomeViewModel>()),
       _ => ErrorWidget(Exception()),
     };
     return MaterialPageRoute(builder: (_) => page, settings: settings);
