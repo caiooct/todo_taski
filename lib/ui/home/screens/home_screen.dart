@@ -17,6 +17,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late final List<Widget> screens;
 
+  HomeViewModel get viewModel => widget.viewModel;
+
   @override
   void initState() {
     super.initState();
@@ -27,8 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
       SizedBox(),
     ];
   }
-
-  int index = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,10 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      body: screens[index],
+      body: ValueListenableBuilder(
+        valueListenable: viewModel,
+        builder: (_, index, __) => screens[index],
+      ),
       bottomNavigationBar: DecoratedBox(
         decoration: BoxDecoration(
           boxShadow: [
@@ -60,29 +63,32 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-        child: BottomNavigationBar(
-          onTap: (value) {
-            if (value == 1) {
-              // TODO: IMPLEMENT
-            } else {
-              setState(() {
-                index = value;
-              });
-            }
+        child: ValueListenableBuilder(
+          valueListenable: viewModel,
+          builder: (_, index, __) {
+            return BottomNavigationBar(
+              onTap: (value) {
+                if (value == 1) {
+                  // TODO: IMPLEMENT
+                } else {
+                  viewModel.goToTab(value);
+                }
+              },
+              selectedLabelStyle: TextTheme.of(context).labelLarge?.copyWith(fontWeight: FontWeight.w600),
+              unselectedLabelStyle: TextTheme.of(context).labelLarge?.copyWith(fontWeight: FontWeight.w600),
+              currentIndex: index,
+              selectedItemColor: AppColors.blue,
+              unselectedItemColor: AppColors.mutedAzure,
+              backgroundColor: Colors.white,
+              type: BottomNavigationBarType.fixed,
+              items: [
+                _TabItem(iconPath: Assets.todoIcon, label: 'Todo'),
+                _TabItem(iconPath: Assets.createIcon, label: 'Create'),
+                _TabItem(iconPath: Assets.searchIcon, label: 'Search'),
+                _TabItem(iconPath: Assets.doneIcon, label: 'Done'),
+              ],
+            );
           },
-          selectedLabelStyle: TextTheme.of(context).labelLarge?.copyWith(fontWeight: FontWeight.w600),
-          unselectedLabelStyle: TextTheme.of(context).labelLarge?.copyWith(fontWeight: FontWeight.w600),
-          currentIndex: index,
-          selectedItemColor: AppColors.blue,
-          unselectedItemColor: AppColors.mutedAzure,
-          backgroundColor: Colors.white,
-          type: BottomNavigationBarType.fixed,
-          items: [
-            _TabItem(iconPath: Assets.todoIcon, label: 'Todo'),
-            _TabItem(iconPath: Assets.createIcon, label: 'Create'),
-            _TabItem(iconPath: Assets.searchIcon, label: 'Search'),
-            _TabItem(iconPath: Assets.doneIcon, label: 'Done'),
-          ],
         ),
       ),
     );
