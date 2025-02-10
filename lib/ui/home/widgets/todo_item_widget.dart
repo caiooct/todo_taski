@@ -6,13 +6,13 @@ import '../../../domain/models/todo.dart';
 
 class TodoItemWidget extends StatefulWidget {
   final Todo todo;
-  final Function(bool)? onCheck;
+  final Function(bool) onCheck;
   final VoidCallback? onDelete;
   final VoidCallback? onLongPress;
 
   const TodoItemWidget({
     required this.todo,
-    this.onCheck,
+    required this.onCheck,
     super.key,
     this.onDelete,
     this.onLongPress,
@@ -23,14 +23,7 @@ class TodoItemWidget extends StatefulWidget {
 }
 
 class _TodoItemWidgetState extends State<TodoItemWidget> {
-  bool isChecked = false;
   bool _isExpanded = false;
-
-  @override
-  void initState() {
-    super.initState();
-    isChecked = widget.todo.isCompleted;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,17 +43,14 @@ class _TodoItemWidgetState extends State<TodoItemWidget> {
               activeColor: AppColors.mutedAzure,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
               side: BorderSide(color: AppColors.mutedAzure, width: 2),
-              value: isChecked,
-              onChanged: (value) {
-                widget.onCheck?.call(value ?? false);
-                setState(() => isChecked = !isChecked);
-              },
+              value: widget.todo.isCompleted,
+              onChanged: (value) => widget.onCheck.call(value ?? false),
             ),
             Expanded(
               child: Padding(
                 padding: EdgeInsets.only(top: 10),
                 child: Text(
-                  widget.todo.title,
+                  '${widget.todo.id} - ${widget.todo.title}',
                   maxLines: _isExpanded ? null : 1,
                   overflow: _isExpanded ? null : TextOverflow.ellipsis,
                   style: GoogleFonts.urbanist(
