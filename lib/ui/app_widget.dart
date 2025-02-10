@@ -5,6 +5,8 @@ import '../config/dependencies.dart';
 import 'home/screens/home_screen.dart';
 import 'home/view_models/home_view_model.dart';
 
+final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
+
 class AppWidget extends StatefulWidget {
   const AppWidget({super.key});
 
@@ -16,6 +18,7 @@ class _AppWidgetState extends State<AppWidget> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scaffoldMessengerKey: scaffoldKey,
       theme: AppTheme.theme,
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
