@@ -3,7 +3,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../config/app_colors.dart';
 import '../../../config/assets.dart';
+import '../../../config/dependencies.dart';
+import '../tabs/todo_tab.dart';
 import '../view_models/home_view_model.dart';
+import '../view_models/todo_view_model.dart';
 
 class HomeScreen extends StatefulWidget {
   final HomeViewModel viewModel;
@@ -19,12 +22,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   HomeViewModel get viewModel => widget.viewModel;
 
+  TodoViewModel todoViewModel = injector<TodoViewModel>();
+
   @override
   void initState() {
     super.initState();
     screens = [
-      SizedBox(),
-      SizedBox(),
+      TodoTab(todoViewModel),
+      SizedBox(), // A bottom sheet is shown instead of a screen
       SizedBox(),
       SizedBox(),
     ];
