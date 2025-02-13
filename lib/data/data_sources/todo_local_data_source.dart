@@ -12,16 +12,16 @@ class TodoLocalDataSource implements TodoDataSource {
   IsarCollection<Todo> get _collection => _db.todos;
 
   @override
-  Future<int> create(Todo toDo) async {
+  Future<int> create(Todo todo) async {
     return _db.writeTxn(() async {
-      return _collection.put(toDo);
+      return _collection.put(todo);
     });
   }
 
   @override
-  Future<void> delete(Todo toDo) async {
+  Future<void> delete(Todo todo) async {
     await _db.writeTxn(() async {
-      await _collection.delete(toDo.id);
+      await _collection.delete(todo.id);
     });
   }
 
@@ -35,19 +35,27 @@ class TodoLocalDataSource implements TodoDataSource {
   }
 
   @override
-  Future<List<Todo>> getDones({required int page, required int pageSize}) async {
-    return _collection.filter().isCompletedEqualTo(true).offset(page).limit(pageSize).findAll();
+  Future<PaginatedResult<List<Todo>>> getDones({required int page, required int pageSize}) async {
+    final query = _collection.filter().isCompletedEqualTo(true);
+    return PaginatedResult(
+      totalCount: await query.count(),
+      data: await query.offset(page).limit(pageSize).findAll(),
+    );
   }
 
   @override
-  Future<List<Todo>> search(String query) {
-    return _collection
-        .where(distinct: true)
+  Future<PaginatedResult<List<Todo>>> search(
+      {required String query, required int offset, required int pageSize}) async {
+    final collection = _collection
+        .where()
         .filter()
         .contentContains(query, caseSensitive: false)
         .or()
-        .titleContains(query, caseSensitive: false)
-        .findAll();
+        .titleContains(query, caseSensitive: false);
+    return PaginatedResult(
+      totalCount: await collection.count(),
+      data: await collection.offset(offset).limit(pageSize).findAll(),
+    );
   }
 
   @override

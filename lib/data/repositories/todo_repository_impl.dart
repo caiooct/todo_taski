@@ -21,11 +21,12 @@ class TodoRepositoryImpl implements TodoRepository {
       _dataSource.getTodos(page: page, pageSize: pageSize);
 
   @override
-  Future<List<Todo>> getDones({required int page, required int pageSize}) =>
+  Future<PaginatedResult<List<Todo>>> getDones({required int page, required int pageSize}) =>
       _dataSource.getDones(page: page, pageSize: pageSize);
 
   @override
-  Future<List<Todo>> search(String query) => _dataSource.search(query);
+  Future<PaginatedResult<List<Todo>>> search({required String query, required int offset, required int pageSize}) =>
+      _dataSource.search(query: query, offset: offset, pageSize: pageSize);
 
   @override
   Future<void> update(Todo todo) => _dataSource.update(todo);
