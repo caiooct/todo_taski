@@ -7,6 +7,7 @@ import '../data/data_sources/todo_local_data_source.dart';
 import '../data/repositories/todo_repository.dart';
 import '../data/repositories/todo_repository_impl.dart';
 import '../domain/models/todo.dart';
+import '../ui/home/view_models/done_view_model.dart';
 import '../ui/home/view_models/home_view_model.dart';
 import '../ui/home/view_models/search_view_model.dart';
 import '../ui/home/view_models/todo_view_model.dart';
@@ -25,5 +26,6 @@ Future<void> injectDependencies() async {
   injector.add(HomeViewModel.new);
   injector.add(SearchViewModel.new);
   injector.add(TodoViewModel.new);
+  injector.add(DoneViewModel.new);
   injector.commit();
 }

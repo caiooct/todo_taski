@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../config/app_colors.dart';
 import '../../../config/assets.dart';
 import '../../../config/dependencies.dart';
+import '../tabs/done_tab.dart';
 import '../tabs/search_tab.dart';
 import '../tabs/todo_tab.dart';
 import '../view_models/home_view_model.dart';
@@ -33,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
       TodoTab(todoViewModel),
       SizedBox(), // A bottom sheet is shown instead of a screen
       SearchTab(),
-      SizedBox(),
+      DoneTab(),
     ];
   }
 
