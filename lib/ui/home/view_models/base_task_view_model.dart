@@ -24,14 +24,16 @@ abstract class BaseTaskViewModel extends ChangeNotifier {
   Future<PaginatedResult<List<Todo>>> getUseCase({required int page, required int pageSize, String? query});
 
   void initListeners() {
-    scrollController.addListener(() {
-      if (canLoadMore &&
-          !isLoading &&
-          !isLoadingMore &&
-          scrollController.position.pixels >= scrollController.position.maxScrollExtent - 200) {
-        loadMore();
-      }
-    });
+    scrollController.addListener(_checkLoadMore);
+  }
+
+  void _checkLoadMore() {
+    if (canLoadMore &&
+        !isLoading &&
+        !isLoadingMore &&
+        scrollController.position.pixels >= scrollController.position.maxScrollExtent - 200) {
+      loadMore();
+    }
   }
 
   void checkLoadMoreWhenNoScroll() {
@@ -99,5 +101,9 @@ abstract class BaseTaskViewModel extends ChangeNotifier {
     totalCount--;
     notifyListeners();
     ShowSnackBarHelper.showSuccessSnackBar('Task deleted successfully');
+  }
+
+  void clearListeners() {
+    scrollController.removeListener(_checkLoadMore);
   }
 }

@@ -149,4 +149,9 @@ class _SearchTabState extends State<SearchTab> {
       ),
     );
   }
+  @override
+  void dispose() {
+    viewModel.clearListeners();
+    super.dispose();
+  }
 }

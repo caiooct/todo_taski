@@ -143,4 +143,10 @@ class _TodoTabState extends State<TodoTab> {
           );
         });
   }
+
+  @override
+  void dispose() {
+    viewModel.clearListeners();
+    super.dispose();
+  }
 }

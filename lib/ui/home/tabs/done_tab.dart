@@ -170,4 +170,10 @@ class _DoneTabState extends State<DoneTab> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    viewModel.clearListeners();
+    super.dispose();
+  }
 }

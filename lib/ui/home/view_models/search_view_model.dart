@@ -19,8 +19,12 @@ class SearchViewModel extends BaseTaskViewModel {
 
   @override
   void initListeners() {
-    textEditingController.addListener(() => searchTodos(textEditingController.text));
+    textEditingController.addListener(_onSearch);
     super.initListeners();
+  }
+
+  void _onSearch() {
+    searchTodos(textEditingController.text);
   }
 
   @override
@@ -50,5 +54,11 @@ class SearchViewModel extends BaseTaskViewModel {
       isLoading = false;
       notifyListeners();
     });
+  }
+
+  @override
+  void clearListeners() {
+    super.clearListeners();
+    textEditingController.removeListener(_onSearch);
   }
 }
