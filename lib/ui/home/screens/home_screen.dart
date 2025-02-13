@@ -7,6 +7,7 @@ import '../../../config/dependencies.dart';
 import '../tabs/todo_tab.dart';
 import '../view_models/home_view_model.dart';
 import '../view_models/todo_view_model.dart';
+import '../widgets/todo_form_bottom_sheet.dart';
 
 class HomeScreen extends StatefulWidget {
   final HomeViewModel viewModel;
@@ -74,7 +75,16 @@ class _HomeScreenState extends State<HomeScreen> {
             return BottomNavigationBar(
               onTap: (value) {
                 if (value == 1) {
-                  // TODO: IMPLEMENT
+                  showModalBottomSheet(
+                    barrierColor: Colors.transparent,
+                    context: context,
+                    builder: (_) => TodoFormBottomSheet(
+                      onSave: (newTodo) {
+                        viewModel.goToTab(0);
+                        todoViewModel.createTodo(newTodo, canScroll: true);
+                      },
+                    ),
+                  );
                 } else {
                   viewModel.goToTab(value);
                 }
