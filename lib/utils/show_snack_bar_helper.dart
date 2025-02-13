@@ -4,7 +4,7 @@ import '../config/app_colors.dart';
 import '../ui/app_widget.dart';
 
 abstract final class ShowSnackBarHelper {
-  static void showSuccessSnackBar(String text, SnackBarAction action) {
+  static void showSuccessSnackBar(String text, {SnackBarAction? action}) {
     if (scaffoldKey.currentState == null) return;
     scaffoldKey.currentState!.removeCurrentSnackBar();
     scaffoldKey.currentState!.showSnackBar(
@@ -17,7 +17,8 @@ abstract final class ShowSnackBarHelper {
                 fontWeight: FontWeight.bold,
               ),
         ),
-        margin: const EdgeInsets.fromLTRB(16, 0, 16, 48),
+        margin: const EdgeInsets.fromLTRB(16, 0, 16, 40),
+        duration: const Duration(seconds: 2),
         action: action,
       ),
     );
@@ -37,7 +38,7 @@ abstract final class ShowSnackBarHelper {
                 fontWeight: FontWeight.bold,
               ),
         ),
-        margin: const EdgeInsets.fromLTRB(16, 0, 16, 48),
+        margin: const EdgeInsets.fromLTRB(16, 0, 16, 40),
         showCloseIcon: true,
       ),
     );
