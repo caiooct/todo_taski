@@ -8,6 +8,7 @@ import '../data/repositories/todo_repository.dart';
 import '../data/repositories/todo_repository_impl.dart';
 import '../domain/models/todo.dart';
 import '../ui/home/view_models/home_view_model.dart';
+import '../ui/home/view_models/search_view_model.dart';
 import '../ui/home/view_models/todo_view_model.dart';
 
 final injector = AutoInjector();
@@ -22,6 +23,7 @@ Future<void> injectDependencies() async {
   injector.add<TodoDataSource>(TodoLocalDataSource.new);
   injector.add<TodoRepository>(TodoRepositoryImpl.new);
   injector.add(HomeViewModel.new);
+  injector.add(SearchViewModel.new);
   injector.add(TodoViewModel.new);
   injector.commit();
 }
