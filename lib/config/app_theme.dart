@@ -15,5 +15,27 @@ abstract final class AppTheme {
       backgroundColor: AppColors.blue,
       actionTextColor: Colors.white,
     ),
+    inputDecorationTheme: InputDecorationTheme(
+      hintStyle: _textTheme.labelLarge?.copyWith(color: AppColors.mutedAzure),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: ButtonStyle(
+        backgroundColor: WidgetStateProperty.all(AppColors.blue10),
+        side: WidgetStateProperty.all(BorderSide.none),
+        textStyle: WidgetStateProperty.all(_textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w600)),
+        foregroundColor: WidgetStatePropertyAll(AppColors.blue),
+        iconColor: WidgetStatePropertyAll(AppColors.blue),
+        padding: WidgetStatePropertyAll(EdgeInsets.symmetric(horizontal: 16, vertical: 14)),
+        shape: WidgetStatePropertyAll(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+      ),
+    ),
+    dialogTheme: DialogThemeData(backgroundColor: Colors.white),
+    textButtonTheme: TextButtonThemeData(
+      style: ButtonStyle(foregroundColor: WidgetStateProperty.all(AppColors.blue)),
+    ),
   );
 }
