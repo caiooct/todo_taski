@@ -94,7 +94,7 @@ abstract class BaseTaskViewModel extends ChangeNotifier {
 
   void updateCheckTodo(Todo todo, bool value, int index);
 
-  void deleteTodo(Todo todo) async {
+  Future<void> deleteTodo(Todo todo) async {
     await repository.delete(todo);
     todoList.removeWhere((element) => element.id == todo.id);
     offset--;
