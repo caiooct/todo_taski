@@ -50,7 +50,7 @@ class _TodoItemWidgetState extends State<TodoItemWidget> {
               child: Padding(
                 padding: EdgeInsets.only(top: 10),
                 child: Text(
-                  '${widget.todo.id} - ${widget.todo.title}',
+                  widget.todo.title,
                   maxLines: _isExpanded ? null : 1,
                   overflow: _isExpanded ? null : TextOverflow.ellipsis,
                   style: GoogleFonts.urbanist(
