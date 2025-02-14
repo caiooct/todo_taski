@@ -82,8 +82,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     context: context,
                     builder: (_) => TodoFormBottomSheet(
                       onSave: (newTodo) {
+                        bool canScroll = viewModel.value == 0;
                         viewModel.goToTab(0);
-                        todoViewModel.createTodo(newTodo, canScroll: true);
+                        todoViewModel.createTodo(newTodo, canScroll: canScroll);
                       },
                     ),
                   );
