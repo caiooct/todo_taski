@@ -37,5 +37,12 @@ abstract final class AppTheme {
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(foregroundColor: WidgetStateProperty.all(AppColors.blue)),
     ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      selectedLabelStyle: _textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w600),
+      unselectedLabelStyle: _textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w600),
+      selectedItemColor: AppColors.blue,
+      unselectedItemColor: AppColors.mutedAzure,
+      backgroundColor: Colors.white,
+    )
   );
 }

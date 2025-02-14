@@ -92,12 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   viewModel.goToTab(value);
                 }
               },
-              selectedLabelStyle: TextTheme.of(context).labelLarge?.copyWith(fontWeight: FontWeight.w600),
-              unselectedLabelStyle: TextTheme.of(context).labelLarge?.copyWith(fontWeight: FontWeight.w600),
               currentIndex: index,
-              selectedItemColor: AppColors.blue,
-              unselectedItemColor: AppColors.mutedAzure,
-              backgroundColor: Colors.white,
               type: BottomNavigationBarType.fixed,
               items: [
                 _TabItem(iconPath: Assets.todoIcon, label: 'Todo'),
