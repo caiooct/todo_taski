@@ -44,60 +44,11 @@ class _TodoTabState extends State<TodoTab> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text.rich(
-                  TextSpan(
-                    text: 'Welcome, ',
-                    children: [
-                      TextSpan(text: 'John', style: TextStyle(color: AppColors.blue)),
-                      TextSpan(text: '.'),
-                    ],
-                  ),
-                  style: TextTheme.of(context)
-                      .titleLarge
-                      ?.copyWith(fontWeight: FontWeight.bold, color: AppColors.slatePurple),
-                ),
-                const SizedBox(height: 10),
-                Text(
-                  Intl.plural(
-                    viewModel.totalCount,
-                    zero: 'Create tasks to achieve more',
-                    one: "You've got 1 task to do",
-                    other: "You've got ${viewModel.totalCount} tasks to do",
-                  ),
-                  style: TextTheme.of(context).bodyLarge?.copyWith(color: AppColors.slateBlue),
-                ),
+                _buildHeader(),
                 const SizedBox(height: 32),
                 if (viewModel.todoList.isEmpty)
                   Expanded(
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset(Assets.noData),
-                          const SizedBox(height: 24),
-                          Text(
-                            'You have no task listed.',
-                            style: TextTheme.of(context).bodyLarge?.copyWith(color: AppColors.slateBlue),
-                          ),
-                          const SizedBox(height: 28),
-                          OutlinedButton.icon(
-                            icon: Icon(Icons.add),
-                            onPressed: () {
-                              showModalBottomSheet(
-                                barrierColor: Colors.transparent,
-                                context: context,
-                                builder: (_) => TodoFormBottomSheet(
-                                  onSave: (newTodo) {
-                                    viewModel.createTodo(newTodo);
-                                  },
-                                ),
-                              );
-                            },
-                            label: Text('Create task'),
-                          ),
-                        ],
-                      ),
-                    ),
+                    child: _buildEmptyState(),
                   )
                 else
                   Expanded(
@@ -148,5 +99,65 @@ class _TodoTabState extends State<TodoTab> {
   void dispose() {
     viewModel.clearListeners();
     super.dispose();
+  }
+
+  Widget _buildHeader() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text.rich(
+          TextSpan(
+            text: 'Welcome, ',
+            children: [
+              TextSpan(text: 'John', style: TextStyle(color: AppColors.blue)),
+              TextSpan(text: '.'),
+            ],
+          ),
+          style: TextTheme.of(context).titleLarge?.copyWith(fontWeight: FontWeight.bold, color: AppColors.slatePurple),
+        ),
+        const SizedBox(height: 10),
+        Text(
+          Intl.plural(
+            viewModel.totalCount,
+            zero: 'Create tasks to achieve more',
+            one: "You've got 1 task to do",
+            other: "You've got ${viewModel.totalCount} tasks to do",
+          ),
+          style: TextTheme.of(context).bodyLarge?.copyWith(color: AppColors.slateBlue),
+        )
+      ],
+    );
+  }
+
+  Widget _buildEmptyState() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(Assets.noData),
+          const SizedBox(height: 24),
+          Text(
+            'You have no task listed.',
+            style: TextTheme.of(context).bodyLarge?.copyWith(color: AppColors.slateBlue),
+          ),
+          const SizedBox(height: 28),
+          OutlinedButton.icon(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              showModalBottomSheet(
+                barrierColor: Colors.transparent,
+                context: context,
+                builder: (_) => TodoFormBottomSheet(
+                  onSave: (newTodo) {
+                    viewModel.createTodo(newTodo);
+                  },
+                ),
+              );
+            },
+            label: Text('Create task'),
+          ),
+        ],
+      ),
+    );
   }
 }
